@@ -1,17 +1,30 @@
--- Create a ScreenGui instance (if it's not already present)
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+-- Function to create the text label
+local function createVRDOXLabel()
+    -- Create a ScreenGui instance
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Create a TextLabel instance
-local textLabel = Instance.new("TextLabel")
-textLabel.Parent = screenGui
+    -- Create a TextLabel instance
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Parent = screenGui
 
--- Set the properties of the TextLabel
-textLabel.Text = "VRDOX INJECTED"
-textLabel.TextSize = 30
-textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Red color for text
-textLabel.BackgroundTransparency = 1 -- Make the background transparent
-textLabel.AnchorPoint = Vector2.new(1, 1) -- Anchor to the bottom-right corner
-textLabel.Position = UDim2.new(1, -10, 1, -10) -- Position 10 pixels from the bottom-right corner
-textLabel.Size = UDim2.new(0, 200, 0, 50) -- Set the size of the label
-textLabel.Font = Enum.Font.SourceSansBold -- Set font to bold
+    -- Set the properties of the TextLabel
+    textLabel.Text = "VRDOX INJECTED"
+    textLabel.TextSize = 30
+    textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Red color for text
+    textLabel.BackgroundTransparency = 1 -- Make the background transparent
+    textLabel.AnchorPoint = Vector2.new(1, 1) -- Anchor to the bottom-right corner
+    textLabel.Position = UDim2.new(1, -10, 1, -10) -- Position 10 pixels from the bottom-right corner
+    textLabel.Size = UDim2.new(0, 200, 0, 50) -- Set the size of the label
+    textLabel.Font = Enum.Font.SourceSansBold -- Set font to bold
+end
+
+-- Recreate the text label when the player respawns
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+    -- Delay to ensure the player has fully respawned
+    wait(1)
+    createVRDOXLabel()
+end)
+
+-- Also call the function when the script starts, for the first time
+createVRDOXLabel()
